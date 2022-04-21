@@ -50,3 +50,18 @@ func TestForEach(t *testing.T) {
 		}
 	})
 }
+
+func TestList_Reverse(t *testing.T) {
+	l := New[int]()
+
+	l.Add(5, 4, 3, 2, 1, 0)
+	l.Reverse()
+
+	for i := 0; i < l.Size(); i++ {
+		val := l.Get(i)
+
+		if val != i {
+			t.Fatal("Expected", i, "but got", val)
+		}
+	}
+}
