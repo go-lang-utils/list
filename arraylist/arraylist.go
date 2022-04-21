@@ -23,15 +23,15 @@ func (l arrayList[K]) Remove(index int) {
 	*l.slice = append(s[:index], s[index+1:]...)
 }
 
-func (l arrayList[K]) AddAll(anotherarrayList []K) {
-	*l.slice = append(*l.slice, anotherarrayList...)
+func (l arrayList[K]) AddAll(list []K) {
+	*l.slice = append(*l.slice, list...)
 }
 
 func (l arrayList[K]) Size() int {
 	return len(*l.slice)
 }
 
-func (l arrayList[K]) isEmpty() bool {
+func (l arrayList[K]) IsEmpty() bool {
 	return len(*l.slice) == 0
 }
 

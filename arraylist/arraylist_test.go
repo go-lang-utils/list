@@ -106,7 +106,7 @@ func TestIsEmpty(t *testing.T) {
 
 	l.Remove(0)
 
-	if !l.isEmpty() {
+	if !l.IsEmpty() {
 		t.Fatal("Expected list to be empty but was not")
 	}
 }
