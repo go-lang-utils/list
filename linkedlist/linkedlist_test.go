@@ -1,7 +1,6 @@
 package linkedlist
 
 import (
-	"log"
 	"testing"
 )
 
@@ -11,7 +10,7 @@ func TestLinkedList_Size(t *testing.T) {
 	list.Add(listSlice...)
 
 	if list.Size() != len(listSlice) {
-		log.Fatalf("list.Size() should return %d", len(listSlice))
+		t.Fatalf("list.Size() should return %d", len(listSlice))
 	}
 }
 
@@ -138,13 +137,13 @@ func TestLinkedList_RemoveWithOne(t *testing.T) {
 	list.Remove(0)
 
 	if list.length != 0 {
-		log.Fatalf("list.length should be %d after removal", 0)
+		t.Fatalf("list.length should be %d after removal", 0)
 	}
 	if list.head != nil {
-		log.Fatal("list.head should be nil")
+		t.Fatal("list.head should be nil")
 	}
 	if list.tail != nil {
-		log.Fatal("list.tail should be nil")
+		t.Fatal("list.tail should be nil")
 	}
 }
 
@@ -155,25 +154,25 @@ func TestLinkedList_RemoveWithTwo(t *testing.T) {
 	list.Remove(1)
 
 	if list.length != 1 {
-		log.Fatalf("list.length should be %d", 1)
+		t.Fatalf("list.length should be %d", 1)
 	}
 
 	if list.head != list.tail {
-		log.Fatal("list.head should equal list.tail")
+		t.Fatal("list.head should equal list.tail")
 	}
 
 	if list.head.Next != nil {
-		log.Fatal("list.head.Next should be nil")
+		t.Fatal("list.head.Next should be nil")
 	}
 	if list.head.Prev != nil {
-		log.Fatal("list.head.Prev should be nil")
+		t.Fatal("list.head.Prev should be nil")
 	}
 
 	if list.tail.Next != nil {
-		log.Fatal("list.tail.Next should be nil")
+		t.Fatal("list.tail.Next should be nil")
 	}
 	if list.tail.Prev != nil {
-		log.Fatal("list.tail.Prev should be nil")
+		t.Fatal("list.tail.Prev should be nil")
 	}
 
 	TestLinkedList_RemoveWithOne(t)
@@ -187,10 +186,10 @@ func TestLinkedList_RemoveWithMany(t *testing.T) {
 	list.Remove(2)
 
 	if list.length != len(listSlice)-1 {
-		log.Fatalf("list.length should be %d", len(listSlice)-1)
+		t.Fatalf("list.length should be %d", len(listSlice)-1)
 	}
 	if list.Get(2) != listSlice[3] {
-		log.Fatalf("list[%d] should equal listSlice[%d]", 2, 3)
+		t.Fatalf("list[%d] should equal listSlice[%d]", 2, 3)
 	}
 
 	TestLinkedList_RemoveWithTwo(t)
@@ -202,14 +201,14 @@ func TestLinkedList_AddAll(t *testing.T) {
 	list.AddAll(listSlice)
 
 	if list.length != len(listSlice) {
-		log.Fatalf("list.length should be %d", len(listSlice))
+		t.Fatalf("list.length should be %d", len(listSlice))
 	}
 
 	if list.head.Val != listSlice[0] {
-		log.Fatal("list.head.Val should equal first value in listSlice")
+		t.Fatal("list.head.Val should equal first value in listSlice")
 	}
 	if list.tail.Val != listSlice[len(listSlice)-1] {
-		log.Fatal("list.tail.Val should equal last value in listSlice")
+		t.Fatal("list.tail.Val should equal last value in listSlice")
 	}
 
 	TestLinkedList_Get(t)
@@ -218,13 +217,13 @@ func TestLinkedList_AddAll(t *testing.T) {
 func TestLinkedList_IsEmpty(t *testing.T) {
 	list := New[int]()
 	if !list.IsEmpty() {
-		log.Fatal("list.IsEmpty() should return true for an empty list")
+		t.Fatal("list.IsEmpty() should return true for an empty list")
 	}
 
 	list2 := New[int]()
 	list2.Add(1)
 	if list2.IsEmpty() {
-		log.Fatal("list.IsEmpty() should return false for a non-empty list")
+		t.Fatal("list.IsEmpty() should return false for a non-empty list")
 	}
 }
 
@@ -240,12 +239,12 @@ func TestLinkedList_ForEach(t *testing.T) {
 	})
 
 	if len(listSliceTwo) != list.length {
-		log.Fatalf("listSlice length should equal %d", list.length)
+		t.Fatalf("listSlice length should equal %d", list.length)
 	}
 	for index, item := range listSlice {
 		expected := list.Get(index)
 		if item != expected {
-			log.Fatalf("listSlice[%d] should equal %d", index, expected)
+			t.Fatalf("listSlice[%d] should equal %d", index, expected)
 		}
 	}
 }
@@ -260,7 +259,7 @@ func TestLinkedList_Reverse(t *testing.T) {
 
 	list.ForEach(func(index int, item int) {
 		if item != reversedSlice[index] {
-			log.Fatalf("list[%d] should equal %d after reversing", index, reversedSlice[index])
+			t.Fatalf("list[%d] should equal %d after reversing", index, reversedSlice[index])
 		}
 	})
 }
@@ -274,7 +273,7 @@ func TestLinkedList_ToSlice(t *testing.T) {
 
 	for i, expected := range listSlice {
 		if listSliceActual[i] != expected {
-			log.Fatalf("listSliceActual[%d] should match listSlice[%d]", i, i)
+			t.Fatalf("listSliceActual[%d] should match listSlice[%d]", i, i)
 		}
 	}
 }
@@ -285,7 +284,7 @@ func TestLinkedList_GetFirst(t *testing.T) {
 	list.Add(listSlice...)
 
 	if list.GetFirst() != 1 {
-		log.Fatalf("list.getFirst should be %d", 1)
+		t.Fatalf("list.getFirst should be %d", 1)
 	}
 }
 
@@ -295,6 +294,6 @@ func TestLinkedList_GetLast(t *testing.T) {
 	list.Add(listSlice...)
 
 	if list.GetLast() != 5 {
-		log.Fatalf("list.getFirst should be %d", 5)
+		t.Fatalf("list.getFirst should be %d", 5)
 	}
 }
