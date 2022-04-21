@@ -34,4 +34,15 @@ func (l List[K]) ForEach(predicate func(index int, item K)) {
 
 // Sort
 
-//Reverse
+func (l List[K]) Reverse() {
+	left := 0
+	right := len(*l.slice) - 1
+
+	for left < right {
+		tmp := (*l.slice)[left]
+		(*l.slice)[left] = (*l.slice)[right]
+		(*l.slice)[right] = tmp
+		left++
+		right--
+	}
+}
