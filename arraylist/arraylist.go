@@ -23,8 +23,8 @@ func (l arrayList[K]) Remove(index int) {
 	*l.slice = append(s[:index], s[index+1:]...)
 }
 
-func (l arrayList[K]) AddAll(anotherarrayList []K) {
-	*l.slice = append(*l.slice, anotherarrayList...)
+func (l arrayList[K]) AddAll(list []K) {
+	*l.slice = append(*l.slice, list...)
 }
 
 func (l arrayList[K]) Size() int {
