@@ -26,9 +26,9 @@ func (l List[K]) Size() int {
 	return len(*l.slice)
 }
 
-func (l List[K]) ForEach(function func(index int, item K)) {
+func (l List[K]) ForEach(predicate func(index int, item K)) {
 	for i, k := range *l.slice {
-		function(i, k)
+		predicate(i, k)
 	}
 }
 
