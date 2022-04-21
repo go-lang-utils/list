@@ -4,6 +4,19 @@ import (
 	"testing"
 )
 
+func TestInitValuesInNew(t *testing.T) {
+
+	expectedVal := 1
+
+	l := New(expectedVal)
+
+	val := l.Get(0)
+
+	if val != expectedVal {
+		t.Fatal("Expected", expectedVal, "but got", val)
+	}
+}
+
 func TestAddAndGet(t *testing.T) {
 
 	l := New[int]()
@@ -95,5 +108,17 @@ func TestIsEmpty(t *testing.T) {
 
 	if !l.isEmpty() {
 		t.Fatal("Expected list to be empty but was not")
+	}
+}
+
+func TestToSlice(t *testing.T) {
+	l := New(0, 1, 2, 3)
+
+	intSlice := l.ToSlice()
+
+	for i, value := range intSlice {
+		if value != i {
+			t.Fatal("Expected", i, "but got", value)
+		}
 	}
 }

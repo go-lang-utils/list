@@ -1,14 +1,32 @@
 package list
 
-type List[K any] list[K]
+type List[K any] interface {
+	Add(item ...K)
+
+	Get(index int) K
+
+	Remove(index int)
+
+	AddAll(anotherList []K)
+
+	Size() int
+
+	isEmpty() bool
+
+	ForEach(predicate func(index int, item K))
+
+	Reverse()
+
+	ToSlice() []K
+}
 
 type list[K any] struct {
 	slice *[]K
 }
 
-func New[K any]() list[K] {
+func New[K any](initValues ...K) list[K] {
 	return list[K]{
-		slice: &[]K{},
+		slice: &initValues,
 	}
 }
 
@@ -54,4 +72,8 @@ func (l list[K]) Reverse() {
 		left++
 		right--
 	}
+}
+
+func (l list[K]) ToSlice() []K {
+	return *l.slice
 }
