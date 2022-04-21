@@ -1,4 +1,4 @@
-package list
+package arraylist
 
 import (
 	"testing"
