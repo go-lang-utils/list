@@ -4,6 +4,19 @@ import (
 	"testing"
 )
 
+func TestInitValuesInNew(t *testing.T) {
+
+	expectedVal := 1
+
+	l := New(expectedVal)
+
+	val := l.Get(0)
+
+	if val != expectedVal {
+		t.Fatal("Expected", expectedVal, "but got", val)
+	}
+}
+
 func TestAddAndGet(t *testing.T) {
 
 	l := New[int]()
