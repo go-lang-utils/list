@@ -29,7 +29,6 @@ func (l list[K]) AddAll(anotherList []K) {
 	*l.slice = append(*l.slice, anotherList...)
 }
 
-// Returns the current size of the lists
 func (l list[K]) Size() int {
 	return len(*l.slice)
 }
@@ -44,6 +43,15 @@ func (l list[K]) ForEach(predicate func(index int, item K)) {
 	}
 }
 
-// Sort
+func (l list[K]) Reverse() {
+	left := 0
+	right := len(*l.slice) - 1
 
-//Reverse
+	for left < right {
+		tmp := (*l.slice)[left]
+		(*l.slice)[left] = (*l.slice)[right]
+		(*l.slice)[right] = tmp
+		left++
+		right--
+	}
+}
