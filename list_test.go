@@ -110,3 +110,15 @@ func TestIsEmpty(t *testing.T) {
 		t.Fatal("Expected list to be empty but was not")
 	}
 }
+
+func TestToSlice(t *testing.T) {
+	l := New(0, 1, 2, 3)
+
+	intSlice := l.ToSlice()
+
+	for i, value := range intSlice {
+		if value != i {
+			t.Fatal("Expected", i, "but got", value)
+		}
+	}
+}
