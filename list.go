@@ -1,32 +1,44 @@
 package list
 
-type List[K any] struct {
+type List[K any] list[K]
+
+type list[K any] struct {
 	slice *[]K
 }
 
-func New[K any]() List[K] {
-	return List[K]{
+func New[K any]() list[K] {
+	return list[K]{
 		slice: &[]K{},
 	}
 }
 
-func (l List[K]) Add(item ...K) {
+func (l list[K]) Add(item ...K) {
 	l.AddAll(item)
 }
 
-func (l List[K]) Get(index int) K {
+func (l list[K]) Get(index int) K {
 	return (*l.slice)[index]
 }
 
-func (l List[K]) AddAll(anotherList []K) {
+func (l list[K]) Remove(index int) {
+	s := *l.slice
+	*l.slice = append(s[:index], s[index+1:]...)
+}
+
+func (l list[K]) AddAll(anotherList []K) {
 	*l.slice = append(*l.slice, anotherList...)
 }
 
-func (l List[K]) Size() int {
+// Returns the current size of the lists
+func (l list[K]) Size() int {
 	return len(*l.slice)
 }
 
-func (l List[K]) ForEach(predicate func(index int, item K)) {
+func (l list[K]) isEmpty() bool {
+	return len(*l.slice) == 0
+}
+
+func (l list[K]) ForEach(predicate func(index int, item K)) {
 	for i, k := range *l.slice {
 		predicate(i, k)
 	}

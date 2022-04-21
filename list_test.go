@@ -50,3 +50,15 @@ func TestForEach(t *testing.T) {
 		}
 	})
 }
+
+func TestRemoveAndIsEmpty(t *testing.T) {
+	l := New[int]()
+
+	l.Add(1)
+
+	l.Remove(0)
+
+	if !l.isEmpty() {
+		t.Fatal()
+	}
+}
