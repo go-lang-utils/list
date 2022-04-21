@@ -31,7 +31,7 @@ func (l arrayList[K]) Size() int {
 	return len(*l.slice)
 }
 
-func (l arrayList[K]) isEmpty() bool {
+func (l arrayList[K]) IsEmpty() bool {
 	return len(*l.slice) == 0
 }
 

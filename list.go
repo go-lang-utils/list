@@ -11,7 +11,7 @@ type List[K any] interface {
 
 	Size() int
 
-	isEmpty() bool
+	IsEmpty() bool
 
 	ForEach(predicate func(index int, item K))
 
