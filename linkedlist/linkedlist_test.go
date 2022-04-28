@@ -1,6 +1,7 @@
 package linkedlist
 
 import (
+	"log"
 	"testing"
 )
 
@@ -295,5 +296,28 @@ func TestLinkedList_GetLast(t *testing.T) {
 
 	if list.GetLast() != 5 {
 		t.Fatalf("list.getFirst should be %d", 5)
+	}
+}
+
+func TestLinkedList_Insert(t *testing.T) {
+	list := New[int]()
+	listSlice := []int{1, 2, 3, 4, 6}
+
+	list.Add(listSlice...)
+
+	err := list.Insert(0, 0)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = list.Insert(list.Size()-1, 5)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for i, val := range list.ToSlice() {
+		if i != val {
+			log.Fatal("Expected ", i, " but got ", val)
+		}
 	}
 }

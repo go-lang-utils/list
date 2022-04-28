@@ -1,5 +1,10 @@
 package linkedlist
 
+import (
+	"errors"
+	"strconv"
+)
+
 type node[K any] struct {
 	Val  K
 	Prev *node[K]
@@ -97,6 +102,35 @@ func (l *LinkedList[K]) Size() int {
 
 func (l *LinkedList[K]) IsEmpty() bool {
 	return l.length == 0
+}
+
+func (l *LinkedList[K]) Insert(index int, val K) error {
+	counter := 0
+	currentNode := l.head
+
+	if index > l.length {
+		return errors.New("Index " + strconv.FormatInt(int64(index), 10) + " was out of bounds of list")
+	}
+
+	for counter < index {
+		currentNode = currentNode.Next
+		counter++
+	}
+
+	newNode := &node[K]{
+		Val:  val,
+		Prev: currentNode.Prev,
+		Next: currentNode,
+	}
+
+	if currentNode.Prev == nil {
+		l.head = newNode
+	} else {
+		currentNode.Prev.Next = newNode
+	}
+	l.length++
+
+	return nil
 }
 
 func (l *LinkedList[K]) ForEach(predicate func(index int, item K)) {
