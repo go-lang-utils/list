@@ -92,7 +92,6 @@ func (l *LinkedList[K]) Remove(index int) {
 
 func (l *LinkedList[K]) AddAll(anotherList []K) {
 	for _, element := range anotherList {
-		l.length++
 		l.Add(element)
 	}
 }
