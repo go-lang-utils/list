@@ -108,7 +108,7 @@ func (l *LinkedList[K]) Insert(index int, val K) error {
 	counter := 0
 	currentNode := l.head
 
-	if index > l.length-1 {
+	if index > l.length {
 		return errors.New("Index " + strconv.FormatInt(int64(index), 10) + " was out of bounds of list")
 	}
 
